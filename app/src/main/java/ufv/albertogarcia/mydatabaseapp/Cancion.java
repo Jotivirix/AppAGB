@@ -1,34 +1,34 @@
 package ufv.albertogarcia.mydatabaseapp;
 
 public class Cancion {
-    private int Id;
-    private String Title;
+    private int id;
+    private String title;
     private String author;
-    private int Duracion;
+    private int year;
 
     public Cancion(String title, String author, int year) {
-        Title = title;
+        this.title = title;
         this.author = author;
-        Duracion = year;
+        this.year = year;
     }
 
     public Cancion(int id, String title, String author, int year) {
-        Id = id;
-        Title = title;
+        this.id = id;
+        this.title = title;
         this.author = author;
-        Duracion = year;
+        this.year = year;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        title = title;
     }
 
     public String getAuthor() {
@@ -39,11 +39,11 @@ public class Cancion {
         this.author = author;
     }
 
-    public int getDuracion() {
-        return Duracion;
+    public int getYear() {
+        return year;
     }
 
-    public void setDuracion(int duracion) {
-        Duracion = duracion;
+    public void setYear(int duracion) {
+        year = duracion;
     }
 }

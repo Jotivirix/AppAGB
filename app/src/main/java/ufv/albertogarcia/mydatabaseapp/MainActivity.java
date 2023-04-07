@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList <Cancion> canciones = dbHelper.getCanciones();
 
+        for(int i=0; i<canciones.size(); i++){
+            System.out.println("La canción " + i + " es: " + canciones.get(i).getTitle()
+                    + " compuesta por: " + canciones.get(i).getAuthor()
+                    + " en el año: "+ canciones.get(i).getYear());
+        }
 
         recyclerView = findViewById(R.id.recyclerView);
 

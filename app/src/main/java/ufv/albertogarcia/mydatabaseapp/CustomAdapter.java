@@ -39,7 +39,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MySongView
         holder.songIDList.setText((String.valueOf(position +1)));
         holder.songTitle.setText(String.valueOf(canciones.get(position).getTitle()));
         holder.songAuthor.setText(String.valueOf(canciones.get(position).getAuthor()));
-        holder.songDuracion.setText(String.valueOf(canciones.get(position).getDuracion()));
+        holder.songDuracion.setText(String.valueOf(canciones.get(position).getYear()));
         holder.databaseID.setText(String.valueOf(canciones.get(position).getId()));
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
@@ -62,11 +62,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MySongView
     public int getItemCount() { return canciones.size();}
     public class MySongView extends RecyclerView.ViewHolder{
         LinearLayout mainLayout;
-        EditText songIDList;
-        EditText songTitle;
-        EditText songAuthor;
+        TextView songIDList;
+        TextView songTitle;
+        TextView songAuthor;
         TextView songDuracion;
-
         TextView databaseID;
 
         public MySongView (@NonNull View itemView){

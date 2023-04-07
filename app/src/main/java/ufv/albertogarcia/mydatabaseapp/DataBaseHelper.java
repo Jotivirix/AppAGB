@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     private Context myContext;
-    private static final String DATABASE_NAME = "MyDataBase.db";
+    private static final String DATABASE_NAME = "MySongsDataBase.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "Songs";
 
@@ -29,7 +29,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             " title TEXT NOT NULL, " +
             " author TEXT NOT NULL, " +
-            " length DOUBLE)";
+            " year DOUBLE)";
         db.execSQL(query);
 
     }
@@ -38,12 +38,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //Obtenemos los valores del objeto canción
         String title = song.getTitle();
         String author = song.getAuthor();
-        int duracion = song.getDuracion();
+        int year = song.getYear();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", title);
         contentValues.put("author", author);
-        contentValues.put("length", duracion);
+        contentValues.put("year", year);
 
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -60,7 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     ArrayList <Cancion> getCanciones(){
         ArrayList <Cancion> canciones = new ArrayList<Cancion> ();
         //Query para obtener las canciones
-        String query = " SELECT id, title, author, length FROM " + TABLE_NAME;
+        String query = " SELECT id, title, author, year FROM " + TABLE_NAME;
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor resultado = database.rawQuery(query, null);
 
@@ -68,7 +68,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             canciones.add(new Cancion (resultado.getInt(0),
                     resultado.getString(1),
                     resultado.getString(2),
-                    (int) resultado.getDouble(3)));
+                    resultado.getInt(3)));
         }
         resultado.close();
         return canciones;
@@ -76,16 +76,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
     }
 
-    public void updateSong(String id, String title, String author, int duracion){
+    public void updateSong(String id, String title, String author, int year){
         SQLiteDatabase database =this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("title", title);
         contentValues.put("author", author);
-        contentValues.put("length", duracion);
+        contentValues.put("year", year);
 
         long result = database.update(TABLE_NAME, contentValues, "id = ?", new String [] {id});
 
